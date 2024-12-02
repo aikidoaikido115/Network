@@ -9,5 +9,3 @@
 proof of concept พอนะครับ ไม่ต้องเอาสวยงาม
 ส่งข้อมูลได้ถมอาเรย์ได้จบ
 ส่ง code และ presentation
-
-![alt text](https://media.tenor.com/GCUDvT1eoNAAAAAM/scream-level3.gif)
