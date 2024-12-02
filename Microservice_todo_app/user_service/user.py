@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/users', methods=['POST'])
 def create_user():
-    data = {'username': 'Misha1234'}
+    data = request.get_json()
     user = User(username=data['username'])
     db_session.add(user)
     db_session.commit()
@@ -18,6 +18,17 @@ def get_user(user_id):
         return jsonify({'id': user.id, 'username': user.username})
     else:
         return jsonify({'error': 'User not found'}), 404
+    
+
+#url อย่ามี _ คั่น
+@app.route('/info', methods=['GET'])
+def get_all_user():
+    users = db_session.query(User).all() 
+    if users:
+        users_data = [{'id': user.id, 'username': user.username} for user in users]
+        return jsonify(users_data)
+    else:
+        return jsonify({'error': 'User not found'}), 404
 
 if __name__ == '__main__':
-    app.run(port=5001)
+    app.run(port=5001, debug=True)

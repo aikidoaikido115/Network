@@ -11,4 +11,11 @@ app = Flask(__name__)
 USER_SERVICE_URL = os.getenv('USER_SERVICE_URL')
 
 
-#เดี๋ยวทำระบบสมาชิกเพื่อบันทึกข้อมูลก่อน
+@app.route('/register', methods=['POST'])
+def register():
+    data = request.get_json()
+    resp = requests.post(f'{USER_SERVICE_URL}/users', json=data)
+    return jsonify(resp.json()), resp.status_code
+
+if __name__ == '__main__':
+    app.run(port=5000, debug=True)
