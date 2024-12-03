@@ -17,5 +17,9 @@ def register():
     resp = requests.post(f'{USER_SERVICE_URL}/users', json=data)
     return jsonify(resp.json()), resp.status_code
 
+
+
+#Your code here เดี๋ยวมาต่อ gateway service อื่นๆด้วย
+
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
