@@ -10,5 +10,6 @@ class Room(Base):
     __tablename__ = 'Room'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer)
+    room_name = Column(String)
 
 Base.metadata.create_all(engine)
