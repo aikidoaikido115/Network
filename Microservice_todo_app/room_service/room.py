@@ -6,16 +6,16 @@ app = Flask(__name__)
 @app.route('/add/rooms', methods=['POST'])
 def create_room():
     data = request.get_json()
-    room = Room(user_id=data['user_id'])
+    room = Room(user_id=data['user_id'], room_name=data['room_name'])
     db_session.add(room)
     db_session.commit()
-    return jsonify({'id': room.id, 'user_id': room.user_id}), 201
+    return jsonify({'id': room.id, 'user_id': room.user_id, 'room_name': room.room_name}), 201
 
 @app.route('/query/rooms/<int:room_id>', methods=['GET'])
 def read_room(room_id):
     room = db_session.query(Room).filter(Room.id == room_id).first()
     if room:
-        return jsonify({'id': room.id, 'user_id': room.user_id})
+        return jsonify({'id': room.id, 'user_id': room.user_id, 'room_name': room.room_name})
     else:
         return jsonify({'error': 'Room not found'}), 404
 
