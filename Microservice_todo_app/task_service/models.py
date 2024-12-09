@@ -11,5 +11,6 @@ class Task(Base):
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer)
     description = Column(String)
+    #น่าจะต้องเพิ่ม room_id ด้วย โดยจะสร้าง task ได้ก็ต่อเมื่อมี room นั้นอยู่ก่อนแล้ว
 
 Base.metadata.create_all(engine)
