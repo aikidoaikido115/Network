@@ -12,7 +12,7 @@ def create_task():
     return jsonify({'id': task.id, 'user_id': task.user_id, 'description': task.description}), 201
 
 @app.route('/query/tasks/<int:task_id>', methods=['GET'])
-def get_task(task_id):
+def read_task(task_id):
     task = db_session.query(Task).filter(Task.id == task_id).first()
     if task:
         return jsonify({'id': task.id, 'user_id': task.user_id, 'description': task.description})
