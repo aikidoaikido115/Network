@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import requests
 from dotenv import load_dotenv
 import os
+import json
 
 
 load_dotenv()
@@ -11,6 +12,7 @@ app = Flask(__name__)
 USER_SERVICE_URL = os.getenv('USER_SERVICE_URL')
 TASK_SERVICE_URL = os.getenv('TASK_SERVICE_URL')
 ROOM_SERVICE_URL = os.getenv('ROOM_SERVICE_URL')
+LLM_SERVICE_URL = os.getenv('LLM_SERVICE_URL')
 
 
 @app.route('/register', methods=['POST'])
@@ -55,6 +57,26 @@ def read_task(task_id):
 def delete_task(task_id):
     res = requests.delete(f'{TASK_SERVICE_URL}/remove/tasks/{task_id}')
     return jsonify(res.json()), res.status_code
+
+##################
+@app.route('/gemini', methods=["GET"])
+def ask_gemini():
+    json_body = request.get_json()
+    # user_id = data.get('user_id')
+    # prompt = data.get('prompt')
+    try:
+        # print(LLM_SERVICE_URL)
+        # json_body = {"user_id": user_id}
+
+        res = requests.get(f'{LLM_SERVICE_URL}/llm', json=json_body)
+        data = json.loads(res.text)
+        
+
+        return data, res.status_code
+
+    except requests.exceptions.RequestException as e:
+
+        return jsonify({"error": "Failed to connect to LLM service", "details": str(e)}), 500
 
 
 if __name__ == '__main__':
