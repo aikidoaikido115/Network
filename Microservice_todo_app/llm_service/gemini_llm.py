@@ -51,7 +51,7 @@ def get_llm_response():
     response = model.generate_content(full_prompt)
     print(response.text)
 
-    return jsonify({"llm_message": response.text}),200
+    return jsonify({"llm_message": response.text}), 200
         
 
 if __name__ == '__main__':
