@@ -1,2 +1,3 @@
 __pycache__/
 **/database.sqlite
+llm_service/.env
