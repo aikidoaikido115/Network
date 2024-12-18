@@ -58,6 +58,3 @@ if __name__ == '__main__':
     app.run(port=5004,debug=True)
 
 
-#ลองเทส api ตั้งแต่อันแรกสุดด้วย
-
-
