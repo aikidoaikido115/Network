@@ -10,5 +10,6 @@ class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
     username = Column(String)
+    password = Column(String)
 
 Base.metadata.create_all(engine)

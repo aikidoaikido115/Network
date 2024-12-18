@@ -18,7 +18,14 @@ LLM_SERVICE_URL = os.getenv('LLM_SERVICE_URL')
 @app.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
-    res = requests.post(f'{USER_SERVICE_URL}/users', json=data)
+    res = requests.post(f'{USER_SERVICE_URL}/create/users', json=data)
+    return jsonify(res.json()), res.status_code
+
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    res = requests.post(f'{USER_SERVICE_URL}/auth/users', json=data)
     return jsonify(res.json()), res.status_code
 
 
