@@ -13,6 +13,7 @@ USER_SERVICE_URL = os.getenv('USER_SERVICE_URL')
 TASK_SERVICE_URL = os.getenv('TASK_SERVICE_URL')
 ROOM_SERVICE_URL = os.getenv('ROOM_SERVICE_URL')
 LLM_SERVICE_URL = os.getenv('LLM_SERVICE_URL')
+UPIMG_SERVICE_URL=os.getenv('UPIMG_SERVICE_URL')
 
 
 @app.route('/register', methods=['POST'])
@@ -66,6 +67,23 @@ def delete_task(task_id):
     return jsonify(res.json()), res.status_code
 
 ##################
+@app.route('/add/image', methods=['POST'])
+def add_image():
+    data = request.get_json()
+    res = requests.post(f'{UPIMG_SERVICE_URL}/add/image', json=data)
+    return jsonify(res.json()), res.status_code
+
+@app.route('/query/image/<int:image_id>', methods=['GET'])
+def query_image(image_id):
+    res = requests.get(f'{UPIMG_SERVICE_URL}/query/image/{image_id}')
+    return jsonify(res.json()), res.status_code
+
+@app.route('/delete/image/<int:image_id>', methods=['DELETE'])
+def delete_image(image_id):
+    res = requests.delete(f'{UPIMG_SERVICE_URL}/delete/image/{image_id}')
+    return jsonify(res.json()), res.status_code
+##################
+
 @app.route('/gemini', methods=["GET"])
 def ask_gemini():
     json_body = request.get_json()
