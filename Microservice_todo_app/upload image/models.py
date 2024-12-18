@@ -19,6 +19,7 @@ class Image(Base):
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer)
     filename = Column(String)
+    image_url = Column(String)
 
 # Create the table in the database
 Base.metadata.create_all(engine)
